@@ -4,11 +4,12 @@ import { NavHeaderComponent } from './nav-header/nav-header.component';
 import { AddNoteInputComponent } from './add-note-input/add-note-input.component';
 import { Note } from './model/note';
 import { JsonPipe } from '@angular/common';
+import { NoteCardComponent } from './note-card/note-card.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavHeaderComponent, AddNoteInputComponent, JsonPipe],
+  imports: [RouterOutlet, NavHeaderComponent, AddNoteInputComponent, JsonPipe, NoteCardComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

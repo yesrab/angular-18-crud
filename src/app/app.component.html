@@ -1,8 +1,14 @@
 <main class="main">
   <app-nav-header />
   <app-add-note-input (noteEvent)="receiveNote($event)" />
-
-  {{ NotesList | json }}
+  <div class="p-3 flex flex-col items-center">
+    <hr class="w-[90%]" />
+    @for (note of NotesList; track note.id) {
+      <app-note-card [note]="note" />
+    } @empty {
+      <div>Add notes to view them here...</div>
+    }
+  </div>
 </main>
 
 <router-outlet />
