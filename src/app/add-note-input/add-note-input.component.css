@@ -1,0 +1,10 @@
+:host {
+}
+.addBtn {
+  width: 30px;
+  aspect-ratio: 1/1;
+}
+
+.prioritySelect {
+  max-width: 8%;
+}
