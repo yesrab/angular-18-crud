@@ -1,45 +1,77 @@
-<div class="input-group mb-3 px-5 my-2 inputContainer">
-  <span class="input-group-text">Title</span>
-  <input
-    type="text"
-    class="form-control"
-    placeholder="Note title"
-    aria-label="title"
-    name="title"
-  />
-  <span class="input-group-text">Description</span>
-  <input
-    type="text"
-    class="form-control"
-    placeholder="Add content"
-    aria-label="description"
-    name="description"
-  />
-  <label class="input-group-text" for="inputGroupSelect01">Priority</label>
-  <select
-    class="form-select form-select-sm w-5 prioritySelect"
-    id="inputGroupSelect01"
-    name="priority"
-  >
-    <option disabled selected>Choose...</option>
-    <option class="text-success" value="1">Low</option>
-    <option class="text-primary" value="2">Med</option>
-    <option class="text-danger" value="3">High</option>
-  </select>
-  <button
-    class="btn btn-outline-secondary p-2"
-    type="button"
-    id="button-addon2"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="currentColor"
-      class="bi bi-plus-square-fill addBtn"
-      viewBox="0 0 16 16"
+<form
+  #form="ngForm"
+  [ngClass]="{ 'was-validated': formSubmitted && form.invalid }"
+>
+  <div class="input-group has-validation mb-3 px-5 my-2 inputContainer">
+    <span class="input-group-text">Title*</span>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Note title"
+      aria-label="title"
+      name="title"
+      [(ngModel)]="noteTemplate.title"
+      #title="ngModel"
+      required
+      [ngClass]="{
+        'is-invalid':
+          formSubmitted && (title.touched || title.dirty) && title.invalid
+      }"
+    />
+    <span class="input-group-text">Description*</span>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Add content"
+      aria-label="description"
+      name="description"
+      [(ngModel)]="noteTemplate.description"
+      #description="ngModel"
+      required
+      [ngClass]="{
+        'is-invalid':
+          formSubmitted &&
+          (description.touched || description.dirty) &&
+          description.invalid
+      }"
+    />
+    <label class="input-group-text" for="inputGroupSelect01">Priority*</label>
+    <select
+      class="form-select form-select-sm w-5 prioritySelect"
+      id="inputGroupSelect01"
+      name="priority"
+      [(ngModel)]="noteTemplate.priority"
+      (ngModelChange)="noteTemplate.priority = +$event"
+      #priority="ngModel"
+      required
+      [ngClass]="{
+        'is-invalid':
+          formSubmitted &&
+          (priority.touched || priority.dirty) &&
+          (priority.invalid || noteTemplate.priority === 0)
+      }"
     >
-      <path
-        d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0"
-      />
-    </svg>
-  </button>
-</div>
+      <option disabled selected>Choose...</option>
+      <option class="text-success" value="1">Low</option>
+      <option class="text-primary" value="2">Med</option>
+      <option class="text-danger" value="3">High</option>
+    </select>
+    <button
+      class="btn btn-outline-secondary p-2"
+      type="submit"
+      id="button-addon2"
+      (click)="onSubmit()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        class="bi bi-plus-square-fill addBtn"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0"
+        />
+      </svg>
+    </button>
+  </div>
+</form>
