@@ -1,6 +1,6 @@
-import { Component, Input, ViewChild } from '@angular/core';
-import { FormControl, FormsModule, NgForm } from '@angular/forms';
-import { Notes } from '../model/note';
+import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+import { Note, Notes } from '../model/note';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,24 +12,36 @@ import { CommonModule } from '@angular/common';
 })
 export class AddNoteInputComponent {
   @ViewChild('form') form!: NgForm;
+  @Output() noteEvent = new EventEmitter<Note>()
 
-  noteTemplate: Notes = {
+  noteTemplate: Omit<Note, 'id'> = {
     title: '',
     description: '',
     isCompleated: false,
     priority: 0
-  }
-  formSubmitted = false;
+  };
 
+  formSubmitted = false;
+  sendNote(note: Note) {
+    this.noteEvent.emit(note)
+  }
 
   onSubmit() {
     this.formSubmitted = true;
     if (this.form.invalid) {
-      console.log("form is invalid")
+      console.log("form is invalid");
     } else {
-      // Handle valid form submission
-      console.log(this.noteTemplate)
+      const note = new Note(
+        this.noteTemplate.title,
+        this.noteTemplate.description,
+        this.noteTemplate.isCompleated,
+        this.noteTemplate.priority
+      );
+      this.sendNote(note);
+      this.form.resetForm();
+      this.formSubmitted = false;
     }
   }
-
 }
+
+

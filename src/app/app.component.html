@@ -1,6 +1,8 @@
 <main class="main">
   <app-nav-header />
-  <app-add-note-input />
+  <app-add-note-input (noteEvent)="receiveNote($event)" />
+
+  {{ NotesList | json }}
 </main>
 
 <router-outlet />
