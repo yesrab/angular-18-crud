@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Note } from '../model/note';
 
 @Component({
@@ -13,7 +13,14 @@ export class NoteCardComponent {
   constructor() {
     console.log(this.note)
   }
-  logNote() {
-    console.log(this.note)
+
+
+  @Output() deleteEvent = new EventEmitter<String>()
+  @Output() updateEvent = new EventEmitter<string>()
+  onDelete(id: string) {
+    this.deleteEvent.emit(id)
+  }
+  updateCompleated(id: string) {
+    this.updateEvent.emit(id)
   }
 }

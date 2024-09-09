@@ -6,7 +6,7 @@
     <span class="input-group-text">Title*</span>
     <input
       type="text"
-      class="form-control"
+      class="form-control sm:w-full"
       placeholder="Note title"
       aria-label="title"
       name="title"
@@ -15,7 +15,7 @@
       required
       [ngClass]="{
         'is-invalid':
-          formSubmitted && (title.touched || title.dirty) && title.invalid
+          formSubmitted && (title.touched || title.dirty) && title.invalid,
       }"
     />
     <span class="input-group-text">Description*</span>
@@ -32,7 +32,7 @@
         'is-invalid':
           formSubmitted &&
           (description.touched || description.dirty) &&
-          description.invalid
+          description.invalid,
       }"
     />
     <label class="input-group-text" for="inputGroupSelect01">Priority*</label>
@@ -48,7 +48,7 @@
         'is-invalid':
           formSubmitted &&
           (priority.touched || priority.dirty) &&
-          (priority.invalid || noteTemplate.priority === 0)
+          (priority.invalid || noteTemplate.priority === 0),
       }"
     >
       <option disabled selected>Choose...</option>

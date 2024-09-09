@@ -1,7 +1,4 @@
-<div
-  (click)="logNote()"
-  class="my-2 border rounded-md w-full p-2 flex items-center"
->
+<div class="my-2 border rounded-md w-full p-2 flex items-center">
   <div class="flex-grow">
     <h3>{{ note.title }}</h3>
     <p>{{ note.description }}</p>
@@ -15,7 +12,11 @@
       <span class="bg-red-200 font-bold p-2 rounded-lg">HIGH</span>
     }
 
-    <button class="btn btn-outline-secondary p-2" title="Compleated?">
+    <button
+      (click)="updateCompleated(note.id)"
+      class="btn btn-outline-secondary p-2"
+      title="Compleated?"
+    >
       @if (!note.isCompleated) {
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +49,7 @@
       }
     </button>
 
-    <button class="btn btn-outline-secondary p-2">
+    <button (click)="onDelete(note.id)" class="btn btn-outline-secondary p-2">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"

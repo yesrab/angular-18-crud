@@ -17,11 +17,28 @@ export class AppComponent {
   title = 'angular-18-crud';
   NewNote = signal<Note | undefined>(undefined);
   NotesList: Note[] = []
+
+  //recives notes from the event
   receiveNote($event: Note) {
     console.log($event)
     this.NewNote.set(structuredClone($event))
   }
 
+
+  deleteNote(id: String) {
+    console.log("note to be deleted:", id)
+    this.NotesList = this.NotesList.filter(note => note.id !== id);
+    localStorage.setItem('notes', JSON.stringify(this.NotesList));
+  }
+
+  updateNote(id: string) {
+    console.log("note to be updated:", id);
+    const note = this.NotesList.find(note => note.id === id);
+    if (note) {
+      note.isCompleated = !note.isCompleated;
+      localStorage.setItem('notes', JSON.stringify(this.NotesList));
+    }
+  }
   constructor() {
     console.log('constructor ran')
     const existingNotes = JSON.parse(localStorage.getItem('notes') ?? '[]')
